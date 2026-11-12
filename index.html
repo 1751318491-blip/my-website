@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CCIY 的主页</title>
 <style>
+  .add-skill {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.add-skill input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.add-skill button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #373796;
+  color: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -115,6 +138,10 @@ h2 {
     <section id="skills">
   <h2>我会的技能</h2>
   <div class="skills"></div>
+  <div class="add-skill">
+  <input type="text" id="skillInput" placeholder="输入技能名称">
+  <button id="addBtn">添加</button>
+</div>
 </section>
   </main>
 
