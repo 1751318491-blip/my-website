@@ -6,11 +6,14 @@ logo.textContent = "CGY · 学习中";
 const intro = document.querySelector(".intro");
 intro.textContent = "欢迎来到我的个人网站，这里是我的学习笔记和项目展示。";
 
-const skillList = [
+const defaultSkills = [
   { name: "HTML", level: 80 },
   { name: "CSS", level: 70 },
   { name: "JavaScript", level: 40 }
 ];
+
+const saved = localStorage.getItem("skills");
+const skillList = saved ? JSON.parse(saved) : defaultSkills;
 
 const skillsBox = document.querySelector(".skills");
 
@@ -44,6 +47,10 @@ function renderSkills() {
 
 renderSkills();
 
+function saveSkills() {
+  localStorage.setItem("skills", JSON.stringify(skillList));
+}
+
 const input = document.querySelector("#skillInput");
 const addBtn = document.querySelector("#addBtn");
 
@@ -54,7 +61,17 @@ addBtn.addEventListener("click", function () {
     return;
   }
 
+  const exists = skillList.some(function (item) {
+    return item.name.toLowerCase() === name.toLowerCase();
+  });
+
+  if (exists) {
+    alert("「" + name + "」已经添加过了");
+    return;
+  }
+
   skillList.push({ name: name, level: 0 });
+  saveSkills();
   input.value = "";
   renderSkills();
 });
