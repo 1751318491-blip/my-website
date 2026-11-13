@@ -17,10 +17,7 @@ const skillList = saved ? JSON.parse(saved) : defaultSkills;
 
 const skillsBox = document.querySelector(".skills");
 
-function renderSkills() {
-  skillsBox.innerHTML = "";
-
-  skillList.forEach(function (item) {
+  skillList.forEach(function (item, index) {
     const span = document.createElement("span");
 
     let label = "";
@@ -31,6 +28,29 @@ function renderSkills() {
     } else {
       label = "入门";
     }
+
+    span.textContent = item.name + " · " + label;
+
+    const del = document.createElement("button");
+    del.textContent = "×";
+    del.className = "del";
+    del.addEventListener("click", function (event) {
+      event.stopPropagation();
+      skillList.splice(index, 1);
+      saveSkills();
+      renderSkills();
+    });
+    span.appendChild(del);
+
+    span.addEventListener("click", function () {
+      document.querySelectorAll(".skills span").forEach(function (t) {
+        t.classList.remove("active");
+      });
+      span.classList.add("active");
+    });
+
+    skillsBox.appendChild(span);
+  });
 
     span.textContent = item.name + " · " + label;
 
